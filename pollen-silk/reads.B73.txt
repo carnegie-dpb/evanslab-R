@@ -1,0 +1,6 @@
+STAR-B73-YX24	B73 pollen mapped to B73	P.B73.B73
+STAR-B73-PS422	W22 pollen mapped to B73	P.W22.B73
+STAR-B73-S35464	B73 silks pollinated with W22 pollen mapped to B73	S.B73.P.W22.B73
+STAR-B73-S364_354	W22 silks pollinated with B73 pollen mapped to B73	S.W22.P.B73.B73
+STAR-B73-SS354+355	B73 silks (unpollinated) mapped to B73	S.B73.B73
+STAR-B73-SS364	W22 silks (unpollinated) mapped to B73	S.W22.B73
