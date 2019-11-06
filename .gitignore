@@ -1,0 +1,5 @@
+*.txt
+*.ods
+*.vcf.gz
+*.vcf.gz.tbi
+*.pdf
