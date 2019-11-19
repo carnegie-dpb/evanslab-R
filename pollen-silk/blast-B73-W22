@@ -1,0 +1,6 @@
+#!/bin/sh
+fasta-fetch ~/genomes/Zm-B73-REFERENCE-GRAMENE-4.0/Zm00001d.2.protein.fa ${1}_P001 > /tmp/${1}_P001.fasta
+blastp -query /tmp/${1}_P001.fasta -db ~/genomes/Zm-W22-REFERENCE-NRGENE-2.0/Zm00004b.protein.fa -outfmt 6 -evalue 1e-40
+
+#fasta-fetch ~/genomes/Zm-B73-REFERENCE-GRAMENE-4.0/Zm00001d.2.genomic.fa $1 > /tmp/$1.fasta
+#blastn -query /tmp/$1.fasta -db ~/genomes/Zm-W22-REFERENCE-NRGENE-2.0/Zm00004b.gene.fa -outfmt 6 -evalue 1e-20

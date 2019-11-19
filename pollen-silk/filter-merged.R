@@ -1,15 +1,17 @@
 ## create various filtered index lists
 
 ## "clean" filter:
-##  >0 ALT reads in alt sample
-##  >0 REF reads in ref sample
-##  >0 REF reads in mix sample
-##  >0 ALT reads in mix sample
+##  >5 ALT reads in alt sample (so we know it's an ALT)
+##  >5 REF reads in ref sample (so we know it's a REF)
+##  >9 total reads in mix sample (decent stats)
+##  >0 REF reads in mix sample (for finite ratios)
+##  >0 ALT reads in mix sample (for finite ratios)
 ##  <1% REF reads in alt sample
 ##  <1% ALT reads in ref sample
 clean = 
-    merged$ALTtot.a>0 &
-    merged$REFtot.r>0 &
+    merged$ALTtot.a>5 &
+    merged$REFtot.r>5 &
+    merged$TOT.m>9 &
     merged$REFtot.m>0 &
     merged$ALTtot.m>0 &
     merged$REFtot.a/(merged$REFtot.a+merged$ALTtot.a)<0.01 &

@@ -1,10 +1,7 @@
 ## append the gene name, start, end and length to merged loci where appropriate
+## REQUIRES load-genes.R
 
-## print("Loading genes...")
-source("load-genes.R")
-
-print("Appending genes to loci...")
-for (i in 1:length(merged$CHR)) {
+for (i in 1:nrow(merged)) {
     if (reference=="B73") {
         matches = genes.B73[genes.B73$seqid==merged$CHR[i] & genes.B73$start<=merged$POS[i] & genes.B73$end>=merged$POS[i],]
     } else if (reference=="W22") {
@@ -21,5 +18,3 @@ for (i in 1:length(merged$CHR)) {
 ## remove loci w/o gene association
 merged = merged[!is.na(merged$GENE),]
 
-## reset the filter arrays since the indices have changed
-source("filter-merged.R")

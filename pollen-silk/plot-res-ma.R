@@ -19,5 +19,5 @@ negSignificant = lowPadj & hasSNPs & negLogFC
 points(res$baseMean[posSignificant], res$log2FoldChange[posSignificant], cex=0.3, pch=19, col="darkgreen")
 points(res$baseMean[negSignificant], res$log2FoldChange[negSignificant], cex=0.3, pch=19, col="darkred")
 
-## text(res$baseMean[posSignificant], res$log2FoldChange[posSignificant], rownames(res)[posSignificant], cex=0.5, pos=4, col="darkgreen")
-## text(res$baseMean[negSignificant], res$log2FoldChange[negSignificant], rownames(res)[negSignificant], cex=0.5, pos=4, col="darkred")
+text(res$baseMean[posSignificant], res$log2FoldChange[posSignificant], rownames(res)[posSignificant], cex=0.5, pos=4, offset=0.2, col="darkgreen")
+text(res$baseMean[negSignificant], res$log2FoldChange[negSignificant], rownames(res)[negSignificant], cex=0.5, pos=4, offset=0.2, col="darkred")

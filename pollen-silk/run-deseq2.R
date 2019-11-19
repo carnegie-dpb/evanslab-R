@@ -1,5 +1,5 @@
 ##
-## run DESeq2 on the htseq-counts files.
+## run DESeq2 on the pruned htseq-counts files.
 ##
 
 library(DESeq2)
@@ -14,11 +14,9 @@ library(DESeq2)
 ##                           fileName = sampleFiles,
 ##                           condition = sampleCondition)
 
-## PUT REFS FIRST THEN MIXES
-
 ## reference = "B73"
-## refSampleName = "SS354+355"
-## mixSampleName = "S35464"
+## refSampleName = "SS354+355" # B73 silk REF
+## mixSampleName = "S35464"    # B73 silk <- W22 pollen
 ## sampleTable = data.frame(row.names=c(
 ##                              "SS354+355_0",
 ##                              "SS354+355_2",
@@ -28,9 +26,21 @@ library(DESeq2)
 ##                              "S35464_4"
 ##                          ))
 
+reference = "W22"
+refSampleName = "SS364"     # W22 silk REF
+mixSampleName = "S364_354"  # W22 silk <- B73 pollen
+sampleTable = data.frame(row.names=c(
+                             "SS364_1",
+                             "SS364_2",
+                             "SS364_3",
+                             "S364_354_0",
+                             "S364_354_1",
+                             "S364_354_3"
+                         ))
+
 ## reference = "B73"
-## refSampleName = "YX24"
-## mixSampleName = "S364_354"
+## refSampleName = "YX24"      # B73 pollen REF
+## mixSampleName = "S364_354"  # B73 pollen -> W22 silk
 ## sampleTable = data.frame(row.names=c(
 ##                              "YX24_2",
 ##                              "YX24_5",
@@ -40,21 +50,21 @@ library(DESeq2)
 ##                              "S364_354_3"
 ##                          ))
 
-reference = "W22"
-refSampleName = "PS422"
-mixSampleName = "S35464"
-sampleTable = data.frame(row.names=c(
-                             "PS422_1",
-                             "PS422_2",
-                             "PS422_3",
-                             "S35464_1",
-                             "S35464_2",
-                             "S35464_4"
-                         ))
+## reference = "W22"
+## refSampleName = "PS422"     # W22 pollen REF
+## mixSampleName = "S35464"    # W22 pollen -> B73 silk
+## sampleTable = data.frame(row.names=c(
+##                              "PS422_1",
+##                              "PS422_2",
+##                              "PS422_3",
+##                              "S35464_1",
+##                              "S35464_2",
+##                              "S35464_4"
+##                          ))
 
+## build the sample table
 sampleTable$sampleName = rownames(sampleTable)
-sampleTable$fileName = paste("STAR-",reference,"-",rownames(sampleTable),"/htseq-count.txt",sep="")
-
+sampleTable$fileName = paste("STAR-",reference,"-",rownames(sampleTable),"/htseq-count.pruned.txt",sep="")
 sampleTable$condition = factor(c(rep(refSampleName,3), rep(mixSampleName,3)), levels=c(refSampleName,mixSampleName))
 
 ## fill the DESeqDataSet and set the reference level

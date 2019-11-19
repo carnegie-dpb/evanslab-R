@@ -31,7 +31,7 @@ plot.merged = function(altAllele=FALSE) {
          cex=0.5,
          log="xy",
          ## xlim=c(.5,100),
-         ## ylim=c(100,20000),
+         ## ylim=c(2000,5000),
          xlab = paste(xSampleName,allele,"count"),
          ylab = paste(ySampleName,allele,"count"),
          main=mainTitle
@@ -43,19 +43,6 @@ plot.merged = function(altAllele=FALSE) {
            )
            )
            
-
-    ## highlight up and dn
-    points(xData[deup], yData[deup],
-           cex=0.3, pch=19, col="darkgreen")
-    points(xData[dedn], yData[dedn],
-           cex=0.3, pch=19, col="darkred")
-
-    ## print up and dn gene names
-    text(xData[deup], yData[deup], merged$GENE[deup],
-         pos=2, cex=0.5, offset=0.2, col="darkgreen")
-    text(xData[dedn], yData[dedn], merged$GENE[dedn],
-         pos=4, cex=0.5, offset=0.2, col="darkred")
-
     ## fixed ratio lines
     lines(c(1,1e5), c(1,1e5)*mixRatio, col="gray", lwd=3)
     lines(c(1,1e5), c(1,1e5)*mixRatio*2, col="darkgreen")
@@ -70,6 +57,18 @@ plot.merged = function(altAllele=FALSE) {
     lines(c(1,1e5), c(1,1e5)*mixRatio/16, col="darkred")
     lines(c(1,1e5), c(1,1e5)*mixRatio/32, col="darkred")
     lines(c(1,1e5), c(1,1e5)*mixRatio/64, col="darkred")
+
+    ## highlight up and dn
+    points(xData[deup], yData[deup],
+           cex=0.3, pch=19, col="darkgreen")
+    points(xData[dedn], yData[dedn],
+           cex=0.3, pch=19, col="darkred")
+
+    ## print up and dn gene names
+    text(xData[deup], yData[deup], merged$GENE[deup],
+         pos=4, cex=0.5, offset=0.2, col="darkgreen")
+    text(xData[dedn], yData[dedn], merged$GENE[dedn],
+         pos=4, cex=0.5, offset=0.2, col="darkred")
 
     ## ## print up and dn LOCI
     ## text(xData[deup], yData[deup],
