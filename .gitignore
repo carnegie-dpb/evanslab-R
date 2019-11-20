@@ -3,3 +3,4 @@
 *.vcf.gz
 *.vcf.gz.tbi
 *.pdf
+*.sql
