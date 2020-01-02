@@ -20,9 +20,20 @@ strain = "B73"
 ## gene = c(219939330,219947234)
 ## genename = "Zm00001d018392"
 
-chr = 9
-loc = 10359639
-extend = 30000
+## chr = 9
+## loc = 10359639
+## extend = 30000
+
+chr = 3
+loc  =198728836
+extend = 100
+
+loc2 = 198728808
+loc3 = 198728884
+
+## chr = 3
+## loc = 201850767
+## extend = 1000
 
 minsize = 100
 redline = 1e-6
@@ -56,15 +67,21 @@ lines(xlim,  yline2, col="gray", lty=2)
 lines(c(loc,loc), ylim, col="darkred", lty=3)
 text(loc, ymax, loc, col="darkred")
 
+lines(c(loc2,loc2), ylim, col="darkred", lty=3)
+text(loc2, ymax, loc2, col="darkred")
+
+lines(c(loc3,loc3), ylim, col="darkred", lty=3)
+text(loc3, ymax, loc3, col="darkred")
+
 ## show genes from read.gff dataframe
-##  seqid  source type  start    end score strand phase
-##1     1 gramene gene  44289  49837    NA      +  <NA>
+## seqid  source type  start    end score strand phase
+##     1 gramene gene  44289  49837    NA      +  <NA>
 
 genes = gff[gff$seqid==chr & gff$start>=xmin & gff$start<=xmax,]
 for (i in 1:length(genes$type)) {
     lines(c(genes$start[i],genes$end[i]), c(0,0), col="darkblue", lwd=2)
 }
 
-## arrows(gene[1], 5, gene[2], 5, col="darkblue", lwd=5)
-## text(mean(gene), c(5,5), genename, col="darkblue", pos=3)
+arrows(gene[1], 5, gene[2], 5, col="darkblue", lwd=5)
+text(mean(gene), c(5,5), genename, col="darkblue", pos=3)
 

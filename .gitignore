@@ -1,4 +1,6 @@
 *.txt
+*.xml
+*.fasta
 *.ods
 *.vcf.gz
 *.vcf.gz.tbi

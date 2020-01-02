@@ -3,18 +3,23 @@
 ##                       <numeric>           <numeric>         <numeric>         <numeric>          <numeric>         <numeric>
 ## Zm00001d000001 236373.542774438  -0.303529307769506 0.209377951491212 -1.44967178066142  0.147150068617523 0.382775712497471
 
+if (matches=="imperfect") {
+    title = paste(reference,"imperfect match reads:",mixSampleName,"(mix) /",altSampleName,"(alt)")
+} else {
+    title = paste(reference,"perfect match reads:",mixSampleName,"(mix) /",refSampleName,"(ref)")
+}
+
 plot(res$baseMean, res$log2FoldChange, log="x", cex=0.5,
      xlab="mean base counts", ylab="log2(FC)",
-     main=paste(reference,"perfect match reads:",mixSampleName,"(mix) /",refSampleName,"(ref)")
+     main=title
      )
 
 ## highlight significant
 lowPadj = res$padj<5e-2
-hasSNPs = res$snps>0
 posLogFC = res$log2FoldChange >  1.0
 negLogFC = res$log2FoldChange < -1.0
-posSignificant = lowPadj & hasSNPs & posLogFC
-negSignificant = lowPadj & hasSNPs & negLogFC
+posSignificant = lowPadj & posLogFC
+negSignificant = lowPadj & negLogFC
 
 points(res$baseMean[posSignificant], res$log2FoldChange[posSignificant], cex=0.3, pch=19, col="darkgreen")
 points(res$baseMean[negSignificant], res$log2FoldChange[negSignificant], cex=0.3, pch=19, col="darkred")

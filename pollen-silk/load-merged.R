@@ -11,30 +11,30 @@ singleTissues = c(
 ## reference = "B73"
 ## refMixRatio = 1.81769
 ## altMixRatio = 0.04887
-## mixSampleName = "S35464"    # B73 silk <- W22 pollen
 ## refSampleName = "SS354+355" # B73 silk REF
 ## altSampleName = "PS422"     # W22 pollen ALT
-
-## reference = "B73"
-## refMixRatio = 0.23941
-## altMixRatio = 0.55649
-## mixSampleName = "S364_354"  # B73 pollen -> W22 silk
-## refSampleName = "YX24"      # B73 pollen REF
-## altSampleName = "SS364"     # W22 silk ALT
+## mixSampleName = "S35464"    # B73 silk <- W22 pollen
 
 ## reference = "W22"
 ## refMixRatio = 0.57338
 ## altMixRatio = 0.22939
-## mixSampleName = "S364_354"  # W22 silk <- B73 pollen
 ## refSampleName = "SS364"     # W22 silk REF
 ## altSampleName = "YX24"      # B73 pollen ALT
+## mixSampleName = "S364_354"  # W22 silk <- B73 pollen
+
+## reference = "B73"
+## refMixRatio = 0.23941
+## altMixRatio = 0.55649
+## refSampleName = "YX24"      # B73 pollen REF
+## altSampleName = "SS364"     # W22 silk ALT
+## mixSampleName = "S364_354"  # B73 pollen -> W22 silk
 
 ## reference = "W22"
 ## refMixRatio = 0.04977
 ## altMixRatio = 1.81575
-## mixSampleName = "S35464"    # W22 pollen -> B73 silk
 ## refSampleName = "PS422"     # W22 pollen REF
 ## altSampleName = "SS354+355" # B73 silk ALT
+## mixSampleName = "S35464"    # W22 pollen -> B73 silk
 
 print(paste("Reference=",reference), quote=F)
 

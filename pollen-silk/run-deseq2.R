@@ -1,8 +1,11 @@
-##
 ## run DESeq2 on the pruned htseq-counts files.
 ##
+## NOTE: you must have already loaded the merged VCF records and defined the experiment with read-merged.R
 
 library(DESeq2)
+
+## define which type of matches are being analyzed
+matches = "imperfect"
 
 ## sampleTable: for htseq-count: a ‘data.frame’ with three or more
 ##           columns. Each row describes one sample. The first column is
@@ -14,57 +17,105 @@ library(DESeq2)
 ##                           fileName = sampleFiles,
 ##                           condition = sampleCondition)
 
-## reference = "B73"
-## refSampleName = "SS354+355" # B73 silk REF
-## mixSampleName = "S35464"    # B73 silk <- W22 pollen
-## sampleTable = data.frame(row.names=c(
-##                              "SS354+355_0",
-##                              "SS354+355_2",
-##                              "SS354+355_3",
-##                              "S35464_1",
-##                              "S35464_2",
-##                              "S35464_4"
-##                          ))
+if (mixSampleName=="S35464" && refSampleName=="SS354+355" && altSampleName=="PS422") {
+    if (matches=="perfect") {
+        ## REF
+        sampleTable = data.frame(row.names=c(
+                                     "SS354+355_0",
+                                     "SS354+355_2",
+                                     "SS354+355_3",
+                                     "S35464_1",
+                                     "S35464_2",
+                                     "S35464_4"
+                                 ))
+    } else {
+        ## ALT
+        sampleTable = data.frame(row.names=c(
+                                     "PS422_1",
+                                     "PS422_2",
+                                     "PS422_3",
+                                     "S35464_1",
+                                     "S35464_2",
+                                     "S35464_4"
+                                 ))
+    }
+}
 
-reference = "W22"
-refSampleName = "SS364"     # W22 silk REF
-mixSampleName = "S364_354"  # W22 silk <- B73 pollen
-sampleTable = data.frame(row.names=c(
-                             "SS364_1",
-                             "SS364_2",
-                             "SS364_3",
-                             "S364_354_0",
-                             "S364_354_1",
-                             "S364_354_3"
-                         ))
+if (mixSampleName=="S364_354" && refSampleName=="SS364" && altSampleName=="YX24") {
+    if (matches=="perfect") {
+        ## REF
+        sampleTable = data.frame(row.names=c(
+                                     "SS364_1",
+                                     "SS364_2",
+                                     "SS364_3",
+                                     "S364_354_0",
+                                     "S364_354_1",
+                                     "S364_354_3"
+                                 ))
+    } else {
+        ## ALT
+        sampleTable = data.frame(row.names=c(
+                                     "YX24_2",
+                                     "YX24_5",
+                                     "YX24_10",
+                                     "S364_354_0",
+                                     "S364_354_1",
+                                     "S364_354_3"
+                                 ))
+    }
+}
 
-## reference = "B73"
-## refSampleName = "YX24"      # B73 pollen REF
-## mixSampleName = "S364_354"  # B73 pollen -> W22 silk
-## sampleTable = data.frame(row.names=c(
-##                              "YX24_2",
-##                              "YX24_5",
-##                              "YX24_10",
-##                              "S364_354_0",
-##                              "S364_354_1",
-##                              "S364_354_3"
-##                          ))
+if (mixSampleName=="S364_354" && refSampleName=="YX24" && altSampleName=="SS364") {
+    if (matches=="perfect") {
+        ## REF
+        sampleTable = data.frame(row.names=c(
+                                     "YX24_2",
+                                     "YX24_5",
+                                     "YX24_10",
+                                     "S364_354_0",
+                                     "S364_354_1",
+                                     "S364_354_3"
+                                 ))
+    } else {
+        ## ALT
+        sampleTable = data.frame(row.names=c(
+                                     "SS364_1",
+                                     "SS364_2",
+                                     "SS364_3",
+                                     "S364_354_0",
+                                     "S364_354_1",
+                                     "S364_354_3"
+                                 ))
+    }
+}
 
-## reference = "W22"
-## refSampleName = "PS422"     # W22 pollen REF
-## mixSampleName = "S35464"    # W22 pollen -> B73 silk
-## sampleTable = data.frame(row.names=c(
-##                              "PS422_1",
-##                              "PS422_2",
-##                              "PS422_3",
-##                              "S35464_1",
-##                              "S35464_2",
-##                              "S35464_4"
-##                          ))
+if (mixSampleName=="S35464" && refSampleName=="PS422" && altSampleName=="SS354+355") {
+    if (matches=="perfect") {
+        ## REF
+        sampleTable = data.frame(row.names=c(
+                                     "PS422_1",
+                                     "PS422_2",
+                                     "PS422_3",
+                                     "S35464_1",
+                                     "S35464_2",
+                                     "S35464_4"
+                                 ))
+    } else {
+        ## ALT
+        sampleTable = data.frame(row.names=c(
+                                     "SS354+355_0",
+                                     "SS354+355_2",
+                                     "SS354+355_3",
+                                     "S35464_1",
+                                     "S35464_2",
+                                     "S35464_4"
+                                 ))
+    }
+}
 
 ## build the sample table
 sampleTable$sampleName = rownames(sampleTable)
-sampleTable$fileName = paste("STAR-",reference,"-",rownames(sampleTable),"/htseq-count.pruned.txt",sep="")
+sampleTable$fileName = paste("STAR-",reference,"-",rownames(sampleTable),"/htseq-count.",matches,".pruned.txt",sep="")
 sampleTable$condition = factor(c(rep(refSampleName,3), rep(mixSampleName,3)), levels=c(refSampleName,mixSampleName))
 
 ## fill the DESeqDataSet and set the reference level
