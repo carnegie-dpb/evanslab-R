@@ -1,4 +1,6 @@
 *.txt
+*.tsv
+*.tsv.gz
 *.xml
 *.fasta
 *.ods
@@ -6,3 +8,4 @@
 *.vcf.gz.tbi
 *.pdf
 *.sql
+*.png
