@@ -4,9 +4,6 @@
 
 library(DESeq2)
 
-## define which type of matches are being analyzed
-matches = "imperfect"
-
 ## sampleTable: for htseq-count: a ‘data.frame’ with three or more
 ##           columns. Each row describes one sample. The first column is
 ##           the sample name, the second column the file name of the count

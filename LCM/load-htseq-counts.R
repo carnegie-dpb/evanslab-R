@@ -18,9 +18,9 @@ for (i in 2:length(reads$tissue)) {
     htseq.counts[,samplename] = counts[,samplename]
 }
 
-## purge the genes that have less than 20 total counts
-rowsums = rowSums(htseq.counts)
-htseq.counts = htseq.counts[rowsums>=20,]
+## ## purge the genes that have less than 20 total counts
+## rowsums = rowSums(htseq.counts)
+## htseq.counts = htseq.counts[rowsums>=20,]
 
 ## yank the generic rows
 htseq.counts = subset(htseq.counts, rownames(htseq.counts)!="__no_feature")
@@ -28,7 +28,7 @@ htseq.counts = subset(htseq.counts, rownames(htseq.counts)!="__ambiguous")
 htseq.counts = subset(htseq.counts, rownames(htseq.counts)!="__alignment_not_unique")
 
 ## yank the ENSRNA rows
-htseq.counts = htseq.counts[substr(rownames(htseq.counts),1,6)!="ENSRNA",]
+htseq.counts = subset(htseq.counts, substr(rownames(htseq.counts),1,6)!="ENSRNA")
 
 ## determine the TPM values for each sample
 for (j in 1:length(rownames(htseq.counts))) {

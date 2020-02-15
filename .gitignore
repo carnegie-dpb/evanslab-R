@@ -1,4 +1,6 @@
+~*
 *.txt
+*.txt.gz
 *.tsv
 *.tsv.gz
 *.xml

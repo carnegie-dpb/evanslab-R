@@ -1,10 +1,12 @@
 ## Read the merged DF in from a text dump.
 
-singleTissues = c(
+sampleTissues = c(
     "SS354+355"="B73 silk", 
     "YX24"="B73 pollen", 
     "SS364"="W22 silk", 
-    "PS422"="W22 pollen"
+    "PS422"="W22 pollen",
+    "S364_354"="B73 pollen x W22 silk",
+    "S35464"="W22 pollen x B73 silk"
 )
 
 ## reference = "B73"

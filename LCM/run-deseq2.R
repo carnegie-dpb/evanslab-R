@@ -60,3 +60,10 @@ dds = dds[rowSums(counts(dds))>=10,]
 
 ## filter out genes starting with "ENSRNA"
 dds = dds[substr(rownames(dds),1,6)!="ENSRNA",]
+
+
+## run DESeq and get results
+dds.WES.ACC = DESeq(dds, fitType="local")
+res.WES.ACC = results(dds.WES.ACC)
+res.WES.ACC = res.WES.ACC[!is.na(res$pvalue),]
+res.WES.ACC = res.WES.ACC[!is.na(res$padj),]

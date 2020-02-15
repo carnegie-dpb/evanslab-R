@@ -9,7 +9,7 @@ plot.seg.logOR = function(minReads=4, minHetSamples=45) {
     par(mar=c(0.4,4,0.4,0.4))
     
     xmax = 305861025
-    xmax = max(seg$pos[seg$contig==1])
+    xmax = max(seg$start[seg$contig==1])
     ymax = 2
     
     xlim = c(0,xmax)
@@ -24,7 +24,7 @@ plot.seg.logOR = function(minReads=4, minHetSamples=45) {
     nBsamples = max(seg$Bhom+seg$Bhet) # hopefully the number of non-twin samples
 
     ## require a minimum number of Het samples
-    filter = ((seg$Ahet+seg$Bhet)>=minHetSamples)
+    filter = (seg$Ahet+seg$Bhet)>=minHetSamples
 
     ## require a minimum average number of reads per CALLED sample
     if (minReads>0) {
@@ -38,11 +38,11 @@ plot.seg.logOR = function(minReads=4, minHetSamples=45) {
 
     ## one plot per chromosome
     for (chr in 1:10) {
-        
-        plot(seg$pos[seg$contig==chr & filter], log10(OR[seg$contig==chr & filter]), pch=1, col="black", ylab=paste("Chr",chr), xlim=xlim, ylim=ylim,  xaxt='n', xaxs='i')
+
+        plot(seg$start[seg$contig==chr & filter], log10(OR[seg$contig==chr & filter]), pch=1, col="black", ylab=paste("Chr",chr), xlim=xlim, ylim=ylim,  xaxt='n', xaxs='i')
         
         ## highlight significant p values
-        points(seg$pos[seg$contig==chr & filter & OR>3], log10(OR[seg$contig==chr & filter & OR>3]), pch=19, col="darkred")
+        points(seg$start[seg$contig==chr & filter & OR>3], log10(OR[seg$contig==chr & filter & OR>3]), pch=19, col="darkred")
         lines(xlim,  yline1, col="gray", lty=2)
         lines(xlim,  yline2, col="gray", lty=2)
         

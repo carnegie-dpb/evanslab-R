@@ -17,7 +17,7 @@ plot.vcf.logOR = function(minHetSamples=25) {
     
     ## one plot per chromosome
     for (chr in 1:10) {
-        pts = vcfcounts$chr==chr & (vcfcounts$twHet>=minHetSamples | vcfcounts$ntHet>=minHetSamples)
+        pts = vcfcounts$chr==chr & (vcfcounts$twHet+vcfcounts$ntHet)>=minHetSamples
         plot(vcfcounts$pos[pts], vcfcounts$log10OR[pts], pch=1, cex=0.5, col="black", ylab=paste("Chr",chr), xlim=xlim, ylim=ylim, xaxt='n', xaxs='i')
         lines(xlim, c(0,0), col="gray")
     }
