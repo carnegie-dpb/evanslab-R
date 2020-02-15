@@ -4,7 +4,7 @@
 ## 1	52665	A*	C	29	0	19	27	0	18	1.0	                -0.0	                NaN
 ## 1	52671	T*	C	29	2	17	26	2	17	0.38620074440922747	0.4131868934450027	0.896551724137931
 
-vcfcounts = read.table(file="vcfcounts.txt", header=TRUE)
+vcfcounts = read.table(file="vcfcounts.txt.gz", header=TRUE)
 vcfcounts$log10OR = log10(vcfcounts$OR)
 
 rownames(vcfcounts) = paste(vcfcounts$chr,"_",vcfcounts$pos,sep="")
