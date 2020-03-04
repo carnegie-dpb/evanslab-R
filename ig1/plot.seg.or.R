@@ -3,7 +3,7 @@
 ##   contig start REF ALT   a  b   c   d size          p   mlog10p signif
 ## 1      1  1385   C   T 161 64 162  66  453 0.08212748 1.0855115  false
 ##
-plot.seg.logOR = function(minReads=4, minHetSamples=45) {
+plot.seg.or = function(minReads=4, minHetSamples=45) {
     
     opar = par(mfrow=c(10,1))
     par(mar=c(0.4,4,0.4,0.4))

@@ -23,19 +23,19 @@ sampleTissues = c(
 ## refSampleName = "SS364"     # W22 silk REF
 ## altSampleName = "YX24"      # B73 pollen ALT
 
-## reference = "B73"
-## refMixRatio = 0.23941
-## altMixRatio = 0.55649
-## mixSampleName = "S364_354"  # B73 pollen -> W22 silk
-## refSampleName = "YX24"      # B73 pollen REF
-## altSampleName = "SS364"     # W22 silk ALT
+reference = "B73"
+refMixRatio = 0.23941
+altMixRatio = 0.55649
+mixSampleName = "S364_354"  # B73 pollen -> W22 silk
+refSampleName = "YX24"      # B73 pollen REF
+altSampleName = "SS364"     # W22 silk ALT
 
-reference = "W22"
-refMixRatio = 0.04977
-altMixRatio = 1.81575
-mixSampleName = "S35464"    # W22 pollen -> B73 silk
-refSampleName = "PS422"     # W22 pollen REF
-altSampleName = "SS354+355" # B73 silk ALT
+## reference = "W22"
+## refMixRatio = 0.04977
+## altMixRatio = 1.81575
+## mixSampleName = "S35464"    # W22 pollen -> B73 silk
+## refSampleName = "PS422"     # W22 pollen REF
+## altSampleName = "SS354+355" # B73 silk ALT
 
 merged = read.table(file=paste(reference,mixSampleName,refSampleName,"merged.txt.gz",sep="."))
 

@@ -2,7 +2,7 @@
 ##
 ## requires that read-merged.R or load-merged.R be called in advance, which sets mixRatio for this set.
 
-plot.merged = function(altAllele=FALSE, upGene=NULL, dnGene=NULL, highlight=FALSE, xmin=3, xmax=1e4, ymin=3, ymax=1e4) {
+plot.merged = function(altAllele=FALSE, upGene=NULL, dnGene=NULL, highlight=FALSE, xmin=3, xmax=1e4, ymin=3, ymax=1e4, geneList=NULL) {
 
     if (altAllele) {
         allele = "ALT"
@@ -29,8 +29,17 @@ plot.merged = function(altAllele=FALSE, upGene=NULL, dnGene=NULL, highlight=FALS
                           sampleTissues[altSampleName],"ALT locs")
     }
 
+    ## limit to geneList if provided
+    if (is.null(geneList)) {
+        pts = clean
+    } else {
+        pts = clean & merged$GENE%in%geneList
+    }
+    deup = deup & pts
+    dedn = dedn & pts
+
     ## DOT PLOT
-    plot(xData[clean], yData[clean], 
+    plot(xData[pts], yData[pts], 
          cex=0.5,
          log="xy",
          xlim=c(xmin, xmax),
@@ -84,25 +93,34 @@ plot.merged = function(altAllele=FALSE, upGene=NULL, dnGene=NULL, highlight=FALS
     text(xmax, ymin, paste("mix/single",allele,"ratio =",round(mixRatio,3)), pos=2)
     
     ## legend in top left
-    legend = c("no change",
-               "×2, ×4, ×8, ...",
-               "×1/2, ×1/4, ×1/8, ..."
+    
+    if (is.null(geneList)) {
+        legend = paste(reference, "genes")
+    } else {
+        legend = "B73 & W22 common genes"
+    }
+    
+    legend = c(legend, c("no change",
+                         "×2, ×4, ×8, ...",
+                         "×1/2, ×1/4, ×1/8, ..."
+                         )
                )
+    
     if (!is.null(upGene)) {
         legend = c(legend, upGene)
     }
     if (!is.null(dnGene)) {
         legend = c(legend, dnGene)
     }
-    
+
     legend("topleft", bty="n",
            legend,
-           pch=c(-1,-1,-1,19,19),
-           lty=c(1,1,1,0,0),
-           lwd=c(3,1,1,0,0),
-           pt.cex=c(0,0,0,1.2,1.2),
-           col=c("darkgray","darkred","darkblue","darkred","darkblue"),
-           text.col=c("darkgray","darkred","darkblue","darkred","darkblue")
+           pch=c(-1,-1,-1,-1,19,19),
+           lty=c(1,1,1,1,0,0,0),
+           lwd=c(0,3,1,1,0,0,0),
+           pt.cex=c(0,0,0,0,1.2,1.2,1.2),
+           col=c("black","darkgray","darkred","darkblue","darkred","darkblue","black"),
+           text.col=c("black","darkgray","darkred","darkblue","darkred","darkblue","black")
            )
 
     ## highlight up and dn
@@ -113,10 +131,12 @@ plot.merged = function(altAllele=FALSE, upGene=NULL, dnGene=NULL, highlight=FALS
                cex=0.3, pch=19, col="darkblue")
 
         ## print up and dn gene names
-        text(xData[deup], yData[deup], merged$GENE[deup],
-             pos=4, cex=0.6, offset=0.2, col="darkred")
-        text(xData[dedn], yData[dedn], merged$GENE[dedn],
-             pos=4, cex=0.6, offset=0.2, col="darkblue")
+        if (length(merged$GENE[deup])>0) {
+            text(xData[deup], yData[deup], merged$GENE[deup], pos=4, cex=0.6, offset=0.2, col="darkred")
+        }
+        if (length(merged$GENE[dedn])>0) {
+            text(xData[dedn], yData[dedn], merged$GENE[dedn], pos=4, cex=0.6, offset=0.2, col="darkblue")
+        }
     }
 
     ## ## print up and dn LOCI
