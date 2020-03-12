@@ -1,6 +1,6 @@
 ## plot p-value of each SNP for a given chromosome and region
 ##
-## chr   pos ref alt twRef twHet twHom ntRef ntHet ntHom  p mlog10p  OR log10OR
+## contig    pos ref alt TWRF TWRR TWAF TWAR NTRF NTRR NTAF NTAR TWRef TWHet  TWHom NTRef NTHet NTHom        p      mlog10p  OR log10OR
 ##
 plot.gbs.p.region = function(chr=1, start=0, end=0, ymin=0, ymax=0, minHetSamples=25,
                              gene=NULL, showGenes=FALSE,
@@ -10,11 +10,11 @@ plot.gbs.p.region = function(chr=1, start=0, end=0, ymin=0, ymax=0, minHetSample
         start = genes[gene,]$start
         end = genes[gene,]$end
     } else if (end==0) {
-        end = max(seg$start[seg$contig==chr])
+        end = max(gbscounts$pos[gbscounts$contig==chr])
     }
     xlim = c(start,end)
-
-    pts = gbscounts$chr==chr & gbscounts$pos>=start & gbscounts$pos<=end & is.finite(gbscounts$mlog10p) & (gbscounts$twHet+gbscounts$ntHet)>=minHetSamples
+    
+    pts = gbscounts$contig==chr & gbscounts$pos>=start & gbscounts$pos<=end & is.finite(gbscounts$mlog10p) & (gbscounts$TWHet+gbscounts$NTHet)>=minHetSamples
 
     if (ymax==0) {
         ymax = max(gbscounts$mlog10p[pts])
