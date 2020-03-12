@@ -2,7 +2,7 @@
 ##
 ## contig    pos ref alt TWRF TWRR TWAF TWAR NTRF NTRR NTAF NTAR TWRef TWHet  TWHom NTRef NTHet NTHom        p      mlog10p  OR log10OR
 ##
-plot.gbs.p.region = function(chr=1, start=0, end=0, ymin=0, ymax=0, minHetSamples=25,
+plot.gbs.p.region = function(chr=1, start=0, end=0, ymin=0, ymax=0, minHetSamples=24,
                              gene=NULL, showGenes=FALSE,
                              fitCenter1=0, fitHeight1=0, fitWidth1=0,
                              fitCenter2=0, fitHeight2=0, fitWidth2=0) {

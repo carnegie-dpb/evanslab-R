@@ -21,8 +21,10 @@ for (i in 1:nrow(genes)) {
 rownames(genes) = genes$ID
 genes$ID = NULL
 
-## put the CDS IDs as row names
+## add the CDS IDs and gene names
 ## ID=CDS:Zm00001d027230_P001;Parent=transcript:Zm00001d027230_T001;protein_id=Zm00001d027230_P001
 for (i in 1:nrow(cds)) {
     cds$ID[i] = substring(strsplit(cds$attributes[i], ";")[[1]][1], 8)
+    cds$gene[i] = substring(cds$ID[i], 1, 14)
 }
+
