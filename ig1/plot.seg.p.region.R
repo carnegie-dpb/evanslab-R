@@ -1,7 +1,7 @@
 ##
 ## plot -log10(p) of each SNP on each chromosome, stacked plots, for the BSA
 ##
-plot.seg.p.region = function(chr=1, start=1, end=0, ymin=0, ymax=0, minAltReads=10, maxLogRatio2=4.0, pSig=1.0e-2, showGenes=FALSE, gene=NULL) {
+plot.seg.p.region = function(chr=1, start=1, end=0, ymin=0, ymax=0, minAltReads=20, maxLogRatio2=4.0, pSig=5.0e-8, showGenes=FALSE, gene=NULL) {
 
     if (!is.null(gene)) {
         start = genes[gene,]$start
@@ -44,7 +44,7 @@ plot.seg.p.region = function(chr=1, start=1, end=0, ymin=0, ymax=0, minAltReads=
     if (chr==3) {
         ## show ig1 location
         lines(c(171822155,171822155), c(ymin,ymax*0.9), col="darkgreen", lwd=3)
-        text(171822000, ymin, "B73 LBD6 (ig1)", pos=1, offset=0.4, cex=0.7, col="darkgreen")
+        text(171822000, ymin, "ig1", pos=1, offset=0.4, cex=0.7, col="darkgreen")
     }
 
     if (!is.null(gene) || showGenes) {
@@ -55,14 +55,14 @@ plot.seg.p.region = function(chr=1, start=1, end=0, ymin=0, ymax=0, minAltReads=
             lines(c(inGenes$start[i],inGenes$end[i]), c(ymin,ymin), col="blue", lwd=4)
             text((inGenes$start[i]+inGenes$end[i])/2, ymin, rownames(inGenes)[i], pos=1, offset=0.4, cex=0.8, col="blue")
             if (inGenes$strand[i]=="+") {
-                text(inGenes$end[i], ymin, "\U2192", pos=4, offset=0, cex=2, col="blue")
+                text(inGenes$end[i], ymin, ">", pos=4, offset=-0.3, cex=1.5, col="blue")
             } else {
-                text(inGenes$start[i], ymin, "\U2190", pos=2, offset=0, cex=2, col="blue")
+                text(inGenes$start[i], ymin, "<", pos=2, offset=-0.3, cex=1.5, col="blue")
             }
-        }
-        inCDS = cds[cds$seqid==chr & cds$end>=start & cds$start<=end,]
-        for (i in 1:nrow(inCDS)) {
-            lines(c(inCDS$start[i],inCDS$end[i]), c(ymin,ymin), col="orange", lwd=4)
+            geneCDS = cds[cds$gene==rownames(inGenes)[i],]
+            for (j in 1:nrow(geneCDS)) {
+                lines(c(geneCDS$start[j],geneCDS$end[j]), c(ymin,ymin), col="orange", lwd=4)
+            }
         }
     }
 }
